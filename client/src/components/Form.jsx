@@ -21,7 +21,7 @@ const Form = ({setFiles}) => {
         })
 
         try {
-            const res = await axios.post('/api/upload', formData, config) 
+            const res = await axios.post('/api/files/upload', formData, config) 
 
             setFiles(...res.data)
             

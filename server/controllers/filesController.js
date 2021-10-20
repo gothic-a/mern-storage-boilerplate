@@ -2,17 +2,21 @@ import path from 'path'
 import fs from 'fs'
 import File from '../models/fileModel.js'
 import archiver from 'archiver'
-import mime from 'mime'
 
 class FilesController {
     async get(req, res) {
-        res.send('sdf')
+        try {   
+            const files = await File.find({})
+
+            res.json(files)
+        } catch(e) {
+            res.status(500)
+            res.json(e.message)
+        }
     }
 
     async upload(req, res) {
         try {
-            // UPLOAD TO MONGO
-    
             const files = req.files.map(f => ({
                 name: f.originalname,
                 mimetype: f.mimetype,
@@ -21,10 +25,10 @@ class FilesController {
                 extension: path.extname(f.originalname).toLowerCase(),
                 isImage: f.mimetype.split('/')[0] === 'image'
             }))
-    
-            // UPLOAD TO MONGO
-    
-            res.json(files)
+
+            const response = await File.create(files)
+
+            res.json(response)
         } catch(e) {
             res.status(500)
             res.send(e.message)

@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import axios from 'axios'
+import filesApi from '../../api/files'
 
-const config = {
-    'Content-Type': 'multipart/form-data',
-}
+const { upload } = filesApi
 
 const Form = ({setFiles}) => {
     const [formFiles, setFormFiles] = useState([])
@@ -20,16 +18,12 @@ const Form = ({setFiles}) => {
             formData.append('files', f, f.name)
         })
 
-        try {
-            const res = await axios.post('/api/files/upload', formData, config) 
+        const res = await upload(formData)
 
-            setFiles(...res.data)
+        setFiles(res)
             
-            e.target.reset()
-            setFormFiles([])
-        } catch(e) {
-            console.log(e.message)
-        }
+        e.target.reset()
+        setFormFiles([])
     }
 
     return (

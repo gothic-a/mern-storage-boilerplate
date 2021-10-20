@@ -1,16 +1,31 @@
-import Form from './components/Form'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import filesApi from './api/files'
+
+import Form from './components/UploadForm'
+import FilesList from './components/FilesList'
+
+const { get } = filesApi
 
 function App() {
 	const [files, setFiles] = useState([])
-	console.log(files)
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const files = await get()
+			setFiles(state => [...state, ...files])
+		}
+		
+		fetchData()
+	}, [])
 
 	return (
 		<div className="App">
 			<Form 
-				setFiles={(...files) => setFiles(state => [...state, ...files])}
+				setFiles={(files) => setFiles(state => [...state, ...files])}
 			/>
-			{/* <img src="7c18e3b2235bb733536feb57ee6de6bb" alt="" width="500"/> */}
+			<FilesList
+				files={files}
+			/>
 		</div>
 	);
 }

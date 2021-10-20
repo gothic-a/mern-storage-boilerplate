@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import filesApi from './api/files'
 
+import { StyledApp } from './styled'
 import Form from './components/UploadForm'
 import FilesList from './components/FilesList'
 
@@ -19,14 +20,14 @@ function App() {
 	}, [])
 
 	return (
-		<div className="App">
+		<StyledApp>
 			<Form 
 				setFiles={(files) => setFiles(state => [...state, ...files])}
 			/>
 			<FilesList
 				files={files}
 			/>
-		</div>
+		</StyledApp>
 	);
 }
 

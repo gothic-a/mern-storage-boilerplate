@@ -3,8 +3,8 @@ import {
     FileInfo, 
     FileControls, 
     FileInfoUnit, 
-    Select,
-    Button
+    FilesSelect,
+    FilesButton
 } from "./styled"
 
 const File = ({ file, isSelected, setSelectedFiles, selectedFiles }) => {
@@ -29,24 +29,35 @@ const File = ({ file, isSelected, setSelectedFiles, selectedFiles }) => {
     }
 
     return (
-        <StyledFile data-id={file._id} >
-            <Select 
-                type="checkbox"
-                disabled={!isSelected}
-                checked={selectedFiles.includes(file._id)}
-                value={file._id}
-                onChange={(e) => toggleFile(e)}
-                visible={isSelected}
-            />
-            <FileInfo>
+        <StyledFile>
+            <FileInfo checked={selectedFiles.includes(file._id)}>
+                <FilesSelect 
+                    id={file._id}
+                    disabled={!isSelected}
+                    checked={selectedFiles.includes(file._id)}
+                    value={file._id}
+                    onChange={(e) => toggleFile(e)}
+                    visible={isSelected}
+                    variant={'success'}
+                    type={'checkbox'}
+                />
                 <FileInfoUnit children={file.extension} />
                 <FileInfoUnit children={file.name} width={40}/>
                 <FileInfoUnit children={file.size}/>
                 <FileInfoUnit children={file.createdAt.split('T')[0]}/>
             </FileInfo>
             <FileControls>
-                <Button>Download</Button>
-                <Button>Delete</Button>
+                <FilesButton
+                    data-id={file._id}
+                >
+                    <i className="fas fa-angle-double-down"></i>
+                </FilesButton>
+                <FilesButton 
+                    data-id={file._id}
+                    variant={'danger'}
+                >
+                    <i className="fas fa-trash"></i>
+                </FilesButton>
             </FileControls>
         </StyledFile>
     )

@@ -1,15 +1,21 @@
-import { StyledControls, Button } from './styled'
+import { StyledControls, FilesButton } from './styled'
 
 const Controls = ({isSelected, setIsSelected, downloadAllow}) => {
     return (
         <StyledControls>
-            <Button 
+            <FilesButton 
                 onClick={() => setIsSelected(state => !state)}
                 isSelected={isSelected}
+                size={'m'}
+                variant={'success'}
             >
-                Select
-            </Button>
-            <Button disabled={!downloadAllow || !isSelected}>Download</Button>
+                <i className="fas fa-check-circle"></i>
+            </FilesButton>
+            <FilesButton 
+                disabled={!downloadAllow || !isSelected}
+            >
+                <i className="fas fa-angle-double-down"></i>
+            </FilesButton>
         </StyledControls>  
     )
     

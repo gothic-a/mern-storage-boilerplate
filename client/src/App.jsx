@@ -26,6 +26,7 @@ function App() {
 			/>
 			<FilesList
 				files={files}
+				setFiles={setFiles}
 			/>
 		</StyledApp>
 	);

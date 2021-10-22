@@ -3,7 +3,7 @@ import multer from 'multer'
 import path from 'path'
 import FilesController from '../controllers/filesController.js'
 
-const { get, upload, download } = FilesController
+const { get, upload, download, deleteFiles } = FilesController
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, `${path.resolve()}/uploads`),
@@ -16,5 +16,6 @@ const router = express.Router()
 router.route('/').get(get)
 router.route('/upload').post(dest.array('files', 15), upload)
 router.route('/download').get(download)
+router.route('/delete').delete(deleteFiles)
 
 export default router

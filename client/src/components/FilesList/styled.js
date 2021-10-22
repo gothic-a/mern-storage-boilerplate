@@ -13,7 +13,7 @@ const StyledFile = styled.div`
     width: 100%;
     background-color: #f4f4f4;
     align-items: center;
-    border-bottom: 2px solid white;
+    border-bottom: 3px solid white;
 
     & > * {
         padding: 7px 15px;
@@ -55,6 +55,12 @@ const FilesSelect = styled.input`
 
 const FilesButton = styled(Button)`
     margin-left: 10px;
+    ${({isSelected}) => isSelected && css`
+        background-color: #188e5f;
+        &:hover {
+            opacity: 1
+        }
+    `}
 `
 
 export { 

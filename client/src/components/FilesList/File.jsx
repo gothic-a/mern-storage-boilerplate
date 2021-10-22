@@ -48,13 +48,13 @@ const File = ({ file, isSelected, setSelectedFiles, selectedFiles }) => {
             </FileInfo>
             <FileControls>
                 <FilesButton
-                    data-id={file._id}
+                    data-download_id={file._id}
                 >
                     <i className="fas fa-angle-double-down"></i>
                 </FilesButton>
                 <FilesButton 
-                    data-id={file._id}
                     variant={'danger'}
+                    data-delete_id={file._id}
                 >
                     <i className="fas fa-trash"></i>
                 </FilesButton>

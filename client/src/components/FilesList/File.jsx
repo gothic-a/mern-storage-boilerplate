@@ -28,6 +28,33 @@ const File = ({ file, isSelected, setSelectedFiles, selectedFiles }) => {
         })
     }
 
+    const getSize = (initialSize) => {
+        const measure = {
+            0: 'B',
+            1: 'KB',
+            2: 'MB',
+            3: 'GB',
+            4: 'TB'
+        }
+
+        let iterations = 0
+
+        const convertSize = (convertableSize) => {
+
+            if(convertableSize / 1024 < 1) {
+                return {iterations, convertableSize: convertableSize.toFixed(2)}
+            }
+
+            iterations += 1
+
+            return convertSize(convertableSize / 1024)
+        }
+
+        let { iterations: i, convertableSize: size } = convertSize(initialSize)
+        
+        return `${size} ${measure[i]}`
+    }
+
     return (
         <StyledFile>
             <FileInfo checked={selectedFiles.includes(file._id)}>
@@ -41,9 +68,9 @@ const File = ({ file, isSelected, setSelectedFiles, selectedFiles }) => {
                     variant={'success'}
                     type={'checkbox'}
                 />
-                <FileInfoUnit children={file.extension} />
+                <FileInfoUnit children={file.extension}/>
                 <FileInfoUnit children={file.name} width={40}/>
-                <FileInfoUnit children={file.size}/>
+                <FileInfoUnit children={getSize(file.size)}/>
                 <FileInfoUnit children={file.createdAt.split('T')[0]}/>
             </FileInfo>
             <FileControls>

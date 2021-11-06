@@ -12,7 +12,6 @@ const StyledFile = styled.div`
     display: flex;
     width: 100%;
     background-color: #f4f4f4;
-    align-items: center;
     border-bottom: 3px solid white;
 
     & > * {
@@ -30,8 +29,8 @@ const StyledControls = styled.div`
 const FileInfo = styled.label`
     display: flex;
     border-right: 3px solid white;
-    height: 100%;
     width: 80%;
+    align-items: center;
     cursor: pointer;
     ${({checked}) => checked && css`background-color: #dbdbdb`}
 `
